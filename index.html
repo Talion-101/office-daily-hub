@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Office Daily Hub</title>
-  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body class="default">
   <div class="container">
@@ -12,30 +12,29 @@
     <div id="clock" class="time-box"></div>
 
     <div class="card">
-      <h2>💬 Daily Motivation</h2>
-      <button id="generate-quote">💡 Inspire Me!</button>
+      <h2>💬 Sarcastic Motivation</h2>
+      <button id="motivation-btn" class="big-fun-btn">Need a Kick?</button>
       <p id="daily-quote" style="display:none;"></p>
     </div>
 
     <div class="controls">
-      <span class="theme-btn" id="dark-btn" onclick="setTheme('default')">🌙 Dark</span>
-      <span class="theme-btn" id="light-btn" onclick="setTheme('light')">☀️ Light</span>
+      <span class="theme-btn active" id="dark-btn">🌙 Dark Theme</span>
+    </div>
+
+    <div class="card">
+      <h2>☕ Coffee Break Generator</h2>
+      <button id="coffee-btn" class="big-fun-btn">Give Me a Break!</button>
+      <p id="coffee-idea" style="margin-top: 15px; font-style: italic; font-size: 1.1em; color: #ff9bcb;"></p>
     </div>
 
     <div class="card">
       <h2>✅ Weekly Goals</h2>
       <ul id="goals-list">
-        <li><label><input type="checkbox" data-id="goal1"/> Finalize Presentation</label></li>
-        <li><label><input type="checkbox" data-id="goal2"/> Submit Weekly Report</label></li>
-        <li><label><input type="checkbox" data-id="goal3"/> Team Meeting Preparation</label></li>
-        <li><label><input type="checkbox" data-id="goal4"/> Client Follow-ups</label></li>
+        <li><label><input type="checkbox" data-id="goal1" /> Finalize Presentation</label></li>
+        <li><label><input type="checkbox" data-id="goal2" /> Submit Weekly Report</label></li>
+        <li><label><input type="checkbox" data-id="goal3" /> Team Meeting Preparation</label></li>
+        <li><label><input type="checkbox" data-id="goal4" /> Client Follow-ups</label></li>
       </ul>
-    </div>
-
-    <div class="card">
-      <h2>📝 Sticky Note (Today)</h2>
-      <textarea id="sticky-note" placeholder="Write your note for today..."></textarea>
-      <div id="note-status"></div>
     </div>
 
     <button onclick="window.print()" id="export-btn">🖨️ Export to PDF</button>
