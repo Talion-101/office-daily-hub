@@ -1,11 +1,11 @@
 /* Dark Cute Theme */
-
 body {
   font-family: "Segoe UI", sans-serif;
   margin: 0;
   padding: 0;
   background-color: #2e2c4d;
   color: #f4f4f4;
+  transition: background 0.5s ease;
 }
 
 .container {
@@ -38,8 +38,7 @@ h1 {
   text-align: left;
 }
 
-input,
-textarea {
+input, textarea {
   width: 100%;
   padding: 10px;
   margin-top: 10px;
@@ -80,4 +79,40 @@ ul#todo-list {
 ul#todo-list li {
   cursor: pointer;
   margin-top: 5px;
+}
+
+/* Mood and Music Controls */
+.controls {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+#mood-select {
+  padding: 6px 10px;
+  border-radius: 6px;
+  background-color: #5a577a;
+  color: #fff;
+  border: 1px solid #999;
+  margin-right: 10px;
+}
+
+#mood-select option {
+  background-color: #3c3a5a;
+}
+
+/* Mood-Based Backgrounds */
+.mood-calm {
+  background: linear-gradient(to right, #a1c4fd, #c2e9fb);
+}
+
+.mood-cheerful {
+  background: linear-gradient(to right, #fff6b7, #f6416c);
+}
+
+.mood-focus {
+  background: linear-gradient(to right, #1f1c2c, #928dab);
+}
+
+.mood-dreamy {
+  background: linear-gradient(to right, #e0c3fc, #8ec5fc);
 }
