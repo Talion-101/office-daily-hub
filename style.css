@@ -3,8 +3,8 @@ body {
   margin: 0;
   padding: 0;
   color: #fff;
-  transition: background 1s ease, color 0.5s ease;
   background-color: #0f0c29;
+  transition: background 1s ease, color 0.5s ease;
 }
 
 .container {
@@ -14,28 +14,13 @@ body {
 }
 
 h1,
-.time-box,
-.controls {
+.time-box {
   text-align: center;
 }
 
 .time-box {
   font-size: 1.2em;
   margin-bottom: 20px;
-}
-
-.controls {
-  margin: 20px 0;
-}
-
-.theme-btn {
-  font-size: 1.5em;
-  margin: 0 15px;
-  cursor: default;
-  padding: 5px 15px;
-  border-radius: 8px;
-  background-color: rgba(255, 255, 255, 0.1);
-  user-select: none;
 }
 
 .card {
@@ -59,25 +44,23 @@ h1,
   transition: background 0.3s ease, transform 0.2s ease;
   user-select: none;
   margin-top: 10px;
+  display: inline-block;
 }
 
-.big-fun-btn:hover {
+.big-fun-btn:hover,
+.big-fun-btn:focus {
   background: linear-gradient(135deg, #ff61a6, #ff9bcb);
   transform: scale(1.05);
+  outline: none;
 }
 
-#daily-quote {
-  font-style: italic;
-  font-size: 1.2em;
-  margin-top: 15px;
-  color: #ff9bcb;
-}
-
+#daily-quote,
 #coffee-idea {
   margin-top: 15px;
   font-style: italic;
   font-size: 1.2em;
   color: #ff9bcb;
+  min-height: 3em; /* reserve space so content doesn't jump */
 }
 
 #goals-list {
@@ -90,9 +73,22 @@ h1,
   font-size: 1.1em;
 }
 
-button#print-btn {
+#export-btn {
   margin-top: 30px;
   background-color: #ff9bcb;
+  border-radius: 12px;
+  border: none;
+  padding: 12px 25px;
+  font-weight: 700;
+  cursor: pointer;
+  color: #222;
+  transition: background 0.3s ease;
+}
+
+#export-btn:hover,
+#export-btn:focus {
+  background-color: #ff61a6;
+  outline: none;
 }
 
 @media print {
@@ -101,8 +97,7 @@ button#print-btn {
     color: #000 !important;
   }
   .card,
-  button,
-  .controls {
+  button {
     display: none;
   }
 }
