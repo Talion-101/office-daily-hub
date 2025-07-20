@@ -9,7 +9,7 @@ function updateClock() {
   let greetText = hour < 12 ? "Good Morning" : hour < 18 ? "Good Afternoon" : "Good Evening";
   greeting.innerText = `${greetText}, ${userName}!`;
 
-  // Show local date/time without timezone info
+  // Local date/time without timezone
   clock.innerText = now.toLocaleString(undefined, {
     weekday: "long",
     year: "numeric",
@@ -23,47 +23,69 @@ function updateClock() {
 setInterval(updateClock, 1000);
 updateClock();
 
-// Sarcastic Motivation Generator
+// Advanced Sarcastic Motivation Generator
+
 const motivationBtn = document.getElementById("motivation-btn");
 const dailyQuote = document.getElementById("daily-quote");
 
-// Sarcastic/funny phrases parts for procedural generation
-const sarcasticStarts = [
-  "Remember, ",
-  "Just a heads-up: ",
-  "Don't forget, ",
-  "FYI: ",
-  "Pro tip: ",
-  "Good news! ",
+// Parts for procedural generation
+const openers = [
+  "Heads up, ",
+  "Just so you know, ",
+  "FYI, ",
+  "Word of advice, ",
   "Warning: ",
+  "News flash, ",
+  "Breaking: "
 ];
 
-const sarcasticMiddles = [
-  "your coffee probably needs more caffeine, ",
-  "your productivity is inversely proportional to your snack intake, ",
-  "your deadlines don’t care about your feelings, ",
-  "your to-do list is judging you, ",
-  "your keyboard is tired of your typos, ",
-  "your boss is suspiciously quiet today, ",
+const subjects = [
+  "your coffee is plotting against you",
+  "the printer hates you",
+  "the snack drawer is empty again",
+  "your emails have feelings too",
+  "your deadlines are silently laughing",
+  "the meeting could've been an email",
+  "your keyboard just filed a complaint",
+  "your computer is secretly judging your browsing history",
+  "your office chair knows all your secrets"
 ];
 
-const sarcasticEnds = [
-  "so buckle up and pretend to work.",
+const sarcasticComments = [
+  "but nobody asked.",
+  "and it's not impressed.",
+  "so maybe try harder?",
+  "but you'll ignore it anyway.",
+  "and it’s definitely not your friend.",
   "but hey, at least you showed up.",
-  "time to fake it till you make it.",
-  "because naps aren’t going to approve themselves.",
-  "so smile like you mean it.",
-  "don't mess it up.",
+  "and it’s more productive than you.",
+  "so maybe stand up and stretch? Or not.",
+  "and it’s the only thing being productive today."
 ];
 
+const punchlines = [
+  "Time to pretend you’re busy!",
+  "Brace yourself for more coffee breaks.",
+  "Fake it till you make it.",
+  "Smile like you mean it — or just fake it better.",
+  "Don’t forget to look stressed enough.",
+  "Keep calm and pretend to multitask.",
+  "Remember: blame your WiFi.",
+  "This message will self-destruct after your next meeting.",
+  "Congratulations, you’re still employed!"
+];
+
+// Generate one sarcastic quote combining random parts
 function generateSarcasticQuote() {
-  const part1 = sarcasticStarts[Math.floor(Math.random() * sarcasticStarts.length)];
-  const part2 = sarcasticMiddles[Math.floor(Math.random() * sarcasticMiddles.length)];
-  const part3 = sarcasticEnds[Math.floor(Math.random() * sarcasticEnds.length)];
-  return part1 + part2 + part3;
+  const part1 = openers[Math.floor(Math.random() * openers.length)];
+  const part2 = subjects[Math.floor(Math.random() * subjects.length)];
+  const part3 = sarcasticComments[Math.floor(Math.random() * sarcasticComments.length)];
+  const part4 = punchlines[Math.floor(Math.random() * punchlines.length)];
+
+  return `${part1}${part2}, ${part3} ${part4}`;
 }
 
-// Show a new sarcastic motivation quote (changes on button press and on page load daily)
+// Show daily quote from localStorage or generate new one
 function showDailyQuote() {
   const today = new Date().toDateString();
   let storedQuote = localStorage.getItem("sarcastic_quote_" + today);
@@ -77,7 +99,7 @@ function showDailyQuote() {
   dailyQuote.style.display = "block";
 }
 
-// On button press, generate and show a new sarcastic quote (overwrites daily one)
+// On button click, generate new quote and overwrite today's quote
 motivationBtn.addEventListener("click", () => {
   const newQuote = generateSarcasticQuote();
   const today = new Date().toDateString();
@@ -86,54 +108,5 @@ motivationBtn.addEventListener("click", () => {
   dailyQuote.style.display = "block";
 });
 
-// Initial load: show daily quote from storage or generate
+// Initialize on page load
 showDailyQuote();
-
-
-// Weekly goals with localStorage persistence
-const goalsList = document.getElementById("goals-list");
-const goalCheckboxes = goalsList.querySelectorAll("input[type=checkbox]");
-
-function loadGoals() {
-  goalCheckboxes.forEach((checkbox) => {
-    const id = checkbox.dataset.id;
-    const saved = localStorage.getItem(`goal_${id}`);
-    checkbox.checked = saved === "true";
-  });
-}
-
-goalCheckboxes.forEach((checkbox) => {
-  checkbox.addEventListener("change", () => {
-    localStorage.setItem(`goal_${checkbox.dataset.id}`, checkbox.checked);
-  });
-});
-
-loadGoals();
-
-// Coffee Break Generator
-const coffeeBtn = document.getElementById("coffee-btn");
-const coffeeIdea = document.getElementById("coffee-idea");
-
-const coffeeBreakIdeas = [
-  "Grab a mysterious flavored coffee — no questions asked.",
-  "Pretend to meditate for 3 minutes (bonus points if anyone notices).",
-  "Try balancing a spoon on your nose. Yes, really.",
-  "Dance like no one's watching, even if they are.",
-  "Make an elaborate coffee art masterpiece — even if it looks terrible.",
-  "Take a quick walk and imagine you’re on a secret spy mission.",
-  "Swap your chair for a stability ball — feel the burn!",
-  "Sing your favorite song quietly and pretend you're in a musical.",
-  "Challenge a colleague to a staring contest over coffee.",
-  "Invent a new coffee-based superhero persona.",
-];
-
-function showCoffeeIdea() {
-  const idea = coffeeBreakIdeas[Math.floor(Math.random() * coffeeBreakIdeas.length)];
-  coffeeIdea.innerText = idea;
-}
-
-// Show one coffee idea on page load
-showCoffeeIdea();
-
-// Change coffee idea on button click
-coffeeBtn.addEventListener("click", showCoffeeIdea);
