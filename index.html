@@ -3,21 +3,28 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Ultimate Sarcasm Booster</title>
+  <title>Sarcasm Central</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
-    <h1 id="greeting"></h1>
-    <p id="nickname"></p>
-    <div class="quote-box">
-      <p id="quote">Press the button… if you dare.</p>
+    <h1 id="greeting"><span id="nickname"></span>,</h1>
+    <div class="card">
+      <h2 id="surpriseTitle">😈 Daily Dose</h2>
+      <p id="sarcasmText">Press the button below if you're brave enough...</p>
+      <button id="motivateBtn">💥 Hit Me Again</button>
+      <div class="meter">
+        <div id="sarcasmMeterFill"></div>
+      </div>
     </div>
-    <button id="inspireBtn">Motivate Me… I Guess</button>
-    <div class="meter-container">
-      <div class="meter-fill" id="sarcasmMeter"></div>
+
+    <div class="card">
+      <h2>☕ Coffee Break Idea</h2>
+      <p id="coffeeIdea">Need a break? Click below to get one you didn't ask for.</p>
+      <button id="coffeeBtn">🍩 Generate One</button>
     </div>
   </div>
+
   <script src="script.js"></script>
 </body>
 </html>
