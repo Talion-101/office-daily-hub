@@ -1,103 +1,82 @@
 body {
-  font-family: 'Segoe UI', sans-serif;
   margin: 0;
   padding: 0;
-  color: #fff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #0f0c29;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
   transition: background 1s ease, color 0.5s ease;
 }
 
 .container {
-  padding: 30px;
-  max-width: 900px;
-  margin: auto;
+  max-width: 600px;
+  padding: 30px 20px 50px;
+  width: 100%;
 }
 
-h1,
-.time-box {
+.centered {
   text-align: center;
+}
+
+h1, .time-box {
+  margin-bottom: 15px;
 }
 
 .time-box {
   font-size: 1.2em;
-  margin-bottom: 20px;
 }
 
 .card {
   background: rgba(255, 255, 255, 0.1);
   border-radius: 10px;
-  padding: 20px;
-  margin: 20px 0;
+  padding: 25px 20px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+  margin-top: 30px;
 }
 
 .big-fun-btn {
-  font-size: 1.8em;
-  padding: 15px 30px;
+  font-size: 1.9em;
+  padding: 18px 40px;
   background: linear-gradient(135deg, #ff9bcb, #ff61a6);
   border: none;
-  border-radius: 12px;
+  border-radius: 16px;
   cursor: pointer;
   color: #222;
   font-weight: 900;
   letter-spacing: 0.05em;
   transition: background 0.3s ease, transform 0.2s ease;
   user-select: none;
-  margin-top: 10px;
+  margin-top: 20px;
   display: inline-block;
 }
 
 .big-fun-btn:hover,
 .big-fun-btn:focus {
   background: linear-gradient(135deg, #ff61a6, #ff9bcb);
-  transform: scale(1.05);
+  transform: scale(1.1);
   outline: none;
 }
 
-#daily-quote,
-#coffee-idea {
-  margin-top: 15px;
+#daily-quote {
   font-style: italic;
-  font-size: 1.2em;
+  font-size: 1.3em;
+  margin-top: 25px;
   color: #ff9bcb;
-  min-height: 3em; /* reserve space so content doesn't jump */
+  min-height: 4em;
+  line-height: 1.4;
 }
 
-#goals-list {
-  list-style-type: none;
-  padding-left: 0;
+.centered-text {
+  text-align: center;
+  margin: 0 auto;
 }
 
-#goals-list li {
-  margin: 10px 0;
-  font-size: 1.1em;
-}
-
-#export-btn {
-  margin-top: 30px;
-  background-color: #ff9bcb;
-  border-radius: 12px;
-  border: none;
-  padding: 12px 25px;
-  font-weight: 700;
-  cursor: pointer;
-  color: #222;
-  transition: background 0.3s ease;
-}
-
-#export-btn:hover,
-#export-btn:focus {
-  background-color: #ff61a6;
-  outline: none;
-}
-
-@media print {
-  body {
-    background: none !important;
-    color: #000 !important;
-  }
-  .card,
-  button {
-    display: none;
+@media (max-width: 600px) {
+  .big-fun-btn {
+    font-size: 1.6em;
+    padding: 15px 30px;
   }
 }
