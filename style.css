@@ -1,9 +1,11 @@
+/* Dark Cute Theme */
+
 body {
   font-family: "Segoe UI", sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f7f9fc;
-  color: #333;
+  background-color: #2e2c4d;
+  color: #f4f4f4;
 }
 
 .container {
@@ -16,6 +18,7 @@ body {
 h1 {
   font-size: 2rem;
   margin-bottom: 10px;
+  color: #fceaff;
 }
 
 .grid {
@@ -27,34 +30,54 @@ h1 {
 }
 
 .card {
-  background-color: #fff;
+  background-color: #3c3a5a;
   border-radius: 12px;
   padding: 20px;
   width: 280px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
   text-align: left;
 }
 
-input, textarea {
+input,
+textarea {
   width: 100%;
   padding: 10px;
   margin-top: 10px;
   border-radius: 8px;
-  border: 1px solid #ccc;
+  border: 1px solid #888;
+  background-color: #5a577a;
+  color: #fff;
 }
 
 button {
   margin-top: 10px;
   padding: 8px 14px;
-  background-color: #4CAF50;
-  color: white;
+  background-color: #d8b4fe;
+  color: #2e2c4d;
   border: none;
   border-radius: 8px;
   cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+button:hover {
+  background-color: #f3d3ff;
 }
 
 #clock {
   font-size: 1.5rem;
   font-weight: bold;
   margin-top: 10px;
+  color: #ffffff;
+}
+
+ul#todo-list {
+  padding-left: 20px;
+  list-style: disc;
+}
+
+ul#todo-list li {
+  cursor: pointer;
+  margin-top: 5px;
 }
