@@ -9,6 +9,7 @@ function updateClock() {
   let greetText = hour < 12 ? "Good Morning" : hour < 18 ? "Good Afternoon" : "Good Evening";
   greeting.innerText = `${greetText}, ${userName}!`;
 
+  // Show local date/time without timezone info
   clock.innerText = now.toLocaleString(undefined, {
     weekday: "long",
     year: "numeric",
@@ -23,7 +24,6 @@ setInterval(updateClock, 1000);
 updateClock();
 
 // Sarcastic Motivation Generator
-
 const motivationBtn = document.getElementById("motivation-btn");
 const dailyQuote = document.getElementById("daily-quote");
 
@@ -64,11 +64,8 @@ function generateSarcasticQuote() {
 }
 
 // Show a new sarcastic motivation quote (changes on button press and on page load daily)
-
 function showDailyQuote() {
-  // Use today's date to store quote key
   const today = new Date().toDateString();
-
   let storedQuote = localStorage.getItem("sarcastic_quote_" + today);
 
   if (!storedQuote) {
@@ -114,7 +111,6 @@ goalCheckboxes.forEach((checkbox) => {
 loadGoals();
 
 // Coffee Break Generator
-
 const coffeeBtn = document.getElementById("coffee-btn");
 const coffeeIdea = document.getElementById("coffee-idea");
 
