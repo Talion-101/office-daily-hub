@@ -11,6 +11,7 @@ body {
   min-height: 100vh;
   text-align: center;
   user-select: none;
+  padding: 10px;
 }
 
 .container {
@@ -25,7 +26,7 @@ body {
 }
 
 h1#greeting {
-  font-size: 2rem;
+  font-size: 1.8rem;
   margin-bottom: 6px;
   color: #ff85c1;
   text-shadow: 1px 1px 5px #ff00aa;
@@ -33,7 +34,7 @@ h1#greeting {
 }
 
 .time-box {
-  font-size: 1.1rem;
+  font-size: 1rem;
   margin-bottom: 20px;
   color: #ffa3cf;
   font-weight: 600;
@@ -49,7 +50,7 @@ h1#greeting {
 }
 
 .card h2 {
-  font-size: 1.7rem;
+  font-size: 1.4rem;
   margin-bottom: 20px;
   color: #ff4ab0;
   user-select: none;
@@ -58,8 +59,8 @@ h1#greeting {
 }
 
 .big-fun-btn {
-  font-size: 1.5rem;
-  padding: 14px 35px;
+  font-size: 1.3rem;
+  padding: 12px 30px;
   background: linear-gradient(135deg, #ff8acc, #ff3a9a);
   border: none;
   border-radius: 18px;
@@ -79,7 +80,7 @@ h1#greeting {
 }
 
 #daily-quote {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: 700;
   line-height: 1.3;
   color: #ff94c9;
@@ -87,4 +88,33 @@ h1#greeting {
   user-select: text;
   white-space: pre-line;
   font-family: 'Comic Sans MS', cursive, sans-serif;
+}
+
+/* Responsive for smaller screens */
+@media (max-width: 480px) {
+  .container {
+    max-width: 320px;
+  }
+
+  h1#greeting {
+    font-size: 1.3rem;
+  }
+
+  .time-box {
+    font-size: 0.9rem;
+  }
+
+  .card h2 {
+    font-size: 1.1rem;
+  }
+
+  .big-fun-btn {
+    font-size: 1.1rem;
+    padding: 10px 25px;
+  }
+
+  #daily-quote {
+    font-size: 1.1rem;
+    min-height: 60px;
+  }
 }
