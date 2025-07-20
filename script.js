@@ -16,52 +16,87 @@ function updateClock() {
     day: "numeric",
     hour: "numeric",
     minute: "numeric",
-    second: "numeric"
+    second: "numeric",
   });
 }
 setInterval(updateClock, 1000);
 updateClock();
 
-// Theme toggle with active button styling
-const darkBtn = document.getElementById("dark-btn");
-const lightBtn = document.getElementById("light-btn");
+// Sarcastic Motivation Generator
 
-function setTheme(mode) {
-  document.body.className = mode;
-  darkBtn.classList.toggle("active", mode === "default");
-  lightBtn.classList.toggle("active", mode === "light");
-}
-setTheme("default"); // default on load
+const motivationBtn = document.getElementById("motivation-btn");
+const dailyQuote = document.getElementById("daily-quote");
 
-darkBtn.addEventListener("click", () => setTheme("default"));
-lightBtn.addEventListener("click", () => setTheme("light"));
-
-// Motivation quotes
-const quotes = [
-  "The future depends on what you do today. — Gandhi",
-  "Success is not final, failure is not fatal. — Churchill",
-  "Believe you can and you're halfway there. — Roosevelt",
-  "Do great work by loving what you do. — Steve Jobs",
-  "Be yourself; everyone else is already taken. — Oscar Wilde"
+// Sarcastic/funny phrases parts for procedural generation
+const sarcasticStarts = [
+  "Remember, ",
+  "Just a heads-up: ",
+  "Don't forget, ",
+  "FYI: ",
+  "Pro tip: ",
+  "Good news! ",
+  "Warning: ",
 ];
 
-const quoteBox = document.getElementById("daily-quote");
-const quoteBtn = document.getElementById("generate-quote");
+const sarcasticMiddles = [
+  "your coffee probably needs more caffeine, ",
+  "your productivity is inversely proportional to your snack intake, ",
+  "your deadlines don’t care about your feelings, ",
+  "your to-do list is judging you, ",
+  "your keyboard is tired of your typos, ",
+  "your boss is suspiciously quiet today, ",
+];
 
-function refreshQuote() {
-  // Always show a new random quote on button click
-  const quote = quotes[Math.floor(Math.random() * quotes.length)];
-  quoteBox.innerText = quote;
-  quoteBox.style.display = "block"; // Make sure it's visible
+const sarcasticEnds = [
+  "so buckle up and pretend to work.",
+  "but hey, at least you showed up.",
+  "time to fake it till you make it.",
+  "because naps aren’t going to approve themselves.",
+  "so smile like you mean it.",
+  "don't mess it up.",
+];
+
+function generateSarcasticQuote() {
+  const part1 = sarcasticStarts[Math.floor(Math.random() * sarcasticStarts.length)];
+  const part2 = sarcasticMiddles[Math.floor(Math.random() * sarcasticMiddles.length)];
+  const part3 = sarcasticEnds[Math.floor(Math.random() * sarcasticEnds.length)];
+  return part1 + part2 + part3;
 }
 
-quoteBtn.addEventListener("click", refreshQuote);
+// Show a new sarcastic motivation quote (changes on button press and on page load daily)
+
+function showDailyQuote() {
+  // Use today's date to store quote key
+  const today = new Date().toDateString();
+
+  let storedQuote = localStorage.getItem("sarcastic_quote_" + today);
+
+  if (!storedQuote) {
+    storedQuote = generateSarcasticQuote();
+    localStorage.setItem("sarcastic_quote_" + today, storedQuote);
+  }
+
+  dailyQuote.innerText = storedQuote;
+  dailyQuote.style.display = "block";
+}
+
+// On button press, generate and show a new sarcastic quote (overwrites daily one)
+motivationBtn.addEventListener("click", () => {
+  const newQuote = generateSarcasticQuote();
+  const today = new Date().toDateString();
+  localStorage.setItem("sarcastic_quote_" + today, newQuote);
+  dailyQuote.innerText = newQuote;
+  dailyQuote.style.display = "block";
+});
+
+// Initial load: show daily quote from storage or generate
+showDailyQuote();
+
 
 // Weekly goals with localStorage persistence
 const goalsList = document.getElementById("goals-list");
 const goalCheckboxes = goalsList.querySelectorAll("input[type=checkbox]");
 
-// Load saved goals state
 function loadGoals() {
   goalCheckboxes.forEach((checkbox) => {
     const id = checkbox.dataset.id;
@@ -70,7 +105,6 @@ function loadGoals() {
   });
 }
 
-// Save goal state on change
 goalCheckboxes.forEach((checkbox) => {
   checkbox.addEventListener("change", () => {
     localStorage.setItem(`goal_${checkbox.dataset.id}`, checkbox.checked);
@@ -79,22 +113,31 @@ goalCheckboxes.forEach((checkbox) => {
 
 loadGoals();
 
-// Sticky notes for today only
-const stickyNote = document.getElementById("sticky-note");
-const noteStatus = document.getElementById("note-status");
-const todayKey = new Date().toDateString();
+// Coffee Break Generator
 
-function loadNote() {
-  stickyNote.value = localStorage.getItem(`note_${todayKey}`) || "";
-  const savedAt = localStorage.getItem(`note_saved_${todayKey}`);
-  noteStatus.innerText = savedAt ? `Saved at: ${savedAt}` : "";
+const coffeeBtn = document.getElementById("coffee-btn");
+const coffeeIdea = document.getElementById("coffee-idea");
+
+const coffeeBreakIdeas = [
+  "Grab a mysterious flavored coffee — no questions asked.",
+  "Pretend to meditate for 3 minutes (bonus points if anyone notices).",
+  "Try balancing a spoon on your nose. Yes, really.",
+  "Dance like no one's watching, even if they are.",
+  "Make an elaborate coffee art masterpiece — even if it looks terrible.",
+  "Take a quick walk and imagine you’re on a secret spy mission.",
+  "Swap your chair for a stability ball — feel the burn!",
+  "Sing your favorite song quietly and pretend you're in a musical.",
+  "Challenge a colleague to a staring contest over coffee.",
+  "Invent a new coffee-based superhero persona.",
+];
+
+function showCoffeeIdea() {
+  const idea = coffeeBreakIdeas[Math.floor(Math.random() * coffeeBreakIdeas.length)];
+  coffeeIdea.innerText = idea;
 }
 
-stickyNote.addEventListener("input", () => {
-  localStorage.setItem(`note_${todayKey}`, stickyNote.value);
-  const time = new Date().toLocaleTimeString();
-  localStorage.setItem(`note_saved_${todayKey}`, time);
-  noteStatus.innerText = `Saved at: ${time}`;
-});
+// Show one coffee idea on page load
+showCoffeeIdea();
 
-loadNote();
+// Change coffee idea on button click
+coffeeBtn.addEventListener("click", showCoffeeIdea);
