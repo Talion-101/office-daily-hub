@@ -1,33 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Office Daily Hub</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
-    <h1>🌞 Welcome to Your Office Dashboard</h1>
+    <h1>🌙 Welcome to Your Office Dashboard</h1>
     <div id="clock"></div>
+
     <div class="grid">
+      <!-- To-Do Section -->
       <div class="card" id="todo-section">
         <h2>📝 To-Do List</h2>
         <ul id="todo-list"></ul>
         <input type="text" id="todo-input" placeholder="Add task..." />
         <button onclick="addTodo()">Add</button>
       </div>
+
+      <!-- Quotes Section -->
       <div class="card" id="quote-section">
         <h2>💬 Daily Quote</h2>
         <p id="quote">Loading...</p>
         <button onclick="newQuote()">New Quote</button>
       </div>
+
+      <!-- Sticky Notes -->
       <div class="card" id="notes-section">
         <h2>📌 Sticky Note</h2>
         <textarea id="note" placeholder="Write anything..."></textarea>
       </div>
+
+      <!-- Calendar Widget -->
+      <div class="card" id="calendar-section">
+        <h2>📅 Calendar</h2>
+        <iframe
+          src="https://calendar.google.com/calendar/embed?src=en.indian%23holiday%40group.v.calendar.google.com&ctz=Asia%2FColombo"
+          style="border: 0"
+          width="100%"
+          height="300"
+          frameborder="0"
+          scrolling="no"
+        ></iframe>
+      </div>
     </div>
   </div>
+
   <script src="script.js"></script>
 </body>
 </html>
