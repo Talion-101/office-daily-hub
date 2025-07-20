@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Office Daily Hub</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
   <div class="container">
@@ -13,41 +13,34 @@
     <div class="controls">
       <label for="mood-select">🎨 Mood:</label>
       <select id="mood-select" onchange="changeMood()">
-        <option value="default">Default</option>
-        <option value="calm">Calm</option>
-        <option value="cheerful">Cheerful</option>
-        <option value="focus">Focus</option>
-        <option value="dreamy">Dreamy</option>
+        <option value="default">Dark</option>
+        <option value="light">Light</option>
+        <option value="cute">Cute</option>
       </select>
-
-      <button onclick="toggleMusic()" id="music-btn">🎵 Play Music</button>
     </div>
-
-    <audio id="bg-music" loop>
-      <source src="ambient.mp3" type="audio/mpeg">
-      Your browser does not support audio.
-    </audio>
 
     <div class="card">
       <h2>📅 Calendar</h2>
-      <iframe src="https://calendar.google.com/calendar/embed?src=en.indian%23holiday%40group.v.calendar.google.com&ctz=Asia%2FColombo" style="border: 0" width="100%" height="300" frameborder="0" scrolling="no"></iframe>
+      <input type="date" id="calendar" onchange="loadDataForDate()"/>
+      <div id="holiday"></div>
     </div>
 
     <div class="card">
-      <h2>📝 To-Do List</h2>
-      <input type="text" id="task-input" placeholder="Add a task...">
-      <button onclick="addTask()">Add</button>
-      <ul id="task-list"></ul>
+      <h2>📝 Sticky Note</h2>
+      <textarea id="sticky-note" placeholder="Write your note..."></textarea>
     </div>
 
     <div class="card">
-      <h2>💬 Daily Quote</h2>
-      <p id="quote"></p>
+      <h2>💬 Motivation</h2>
+      <input type="text" id="quote" placeholder="Add your quote for today"/>
     </div>
 
-    <div class="card">
-      <h2>📌 Sticky Note</h2>
-      <textarea id="sticky-note" placeholder="Type your note here..."></textarea>
+    <div class="card music-card">
+      <h2>🎵 Music</h2>
+      <button onclick="toggleMusic()">Play / Pause</button>
+      <audio id="bg-music" loop>
+        <source src="https://cdn.pixabay.com/download/audio/2023/05/23/audio_67a4f71c3c.mp3?filename=relaxing-vlog-148160.mp3" type="audio/mpeg">
+      </audio>
     </div>
   </div>
 
