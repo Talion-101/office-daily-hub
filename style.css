@@ -13,7 +13,7 @@ body {
   margin: auto;
 }
 
-h1, .time-box {
+h1, .time-box, .controls {
   text-align: center;
 }
 
@@ -23,8 +23,7 @@ h1, .time-box {
 }
 
 .controls {
-  text-align: center;
-  margin-bottom: 20px;
+  margin: 20px 0;
 }
 
 .theme-btn {
@@ -80,8 +79,12 @@ button {
   background-color: #333;
   border-radius: 6px;
   text-align: center;
+  transition: transform 0.2s ease;
 }
-
+.day-box:hover {
+  transform: scale(1.05);
+  background-color: #555;
+}
 .day-box.holiday {
   background-color: #d67bf8;
 }
@@ -89,6 +92,7 @@ button {
 #daily-quote {
   font-style: italic;
   font-size: 1.1em;
+  margin-top: 10px;
 }
 
 #note-status {
@@ -98,7 +102,7 @@ button {
 }
 
 .cute {
-  background: linear-gradient(135deg, #fcb69f, #ffecd2, #fda085);
+  background-image: linear-gradient(135deg, #fcb69f, #ffecd2, #fda085);
   background-size: 400% 400%;
   animation: gradientShift 20s ease infinite;
 }
@@ -114,12 +118,7 @@ button {
     background: none !important;
     color: #000;
   }
-  .card {
-    box-shadow: none;
-    background: none;
-    border: 1px solid #ccc;
-  }
-  button, .controls {
+  .card, button, .controls {
     display: none;
   }
 }
