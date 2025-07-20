@@ -2,34 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sarcastic Motivation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ultimate Sarcasm Booster</title>
   <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Rubik+Doodle+Shadow&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="container">
     <h1 id="greeting"></h1>
-    <h2 id="nickname"></h2>
-
+    <p id="nickname"></p>
     <div class="quote-box">
-      <p id="quote"></p>
-      <button id="generate">I Definitely Need This</button>
+      <p id="quote">Press the button… if you dare.</p>
     </div>
-
-    <div class="meter-box">
-      <div class="sarcasm-meter">
-        <div class="fill"></div>
-      </div>
-      <p class="sarcasm-level" id="sarcasmLevel">Level: Barely offensive...</p>
-    </div>
-
-    <div class="coffee-box">
-      <h3>Coffee Break Idea:</h3>
-      <p id="coffeeIdea"></p>
+    <button id="inspireBtn">Motivate Me… I Guess</button>
+    <div class="meter-container">
+      <div class="meter-fill" id="sarcasmMeter"></div>
     </div>
   </div>
-
   <script src="script.js"></script>
 </body>
 </html>
