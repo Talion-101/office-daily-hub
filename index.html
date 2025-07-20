@@ -35,6 +35,20 @@
       <input type="text" id="quote" placeholder="Add your quote for today"/>
     </div>
 
+    <div class="card">
+      <h2>✅ Weekly Goals</h2>
+      <ul id="goals-list">
+        <li><input type="checkbox" data-task="1"> Finish Report</li>
+        <li><input type="checkbox" data-task="2"> Client Follow-up</li>
+        <li><input type="checkbox" data-task="3"> Team Standup</li>
+        <li><input type="checkbox" data-task="4"> Budget Review</li>
+      </ul>
+      <div id="progress-container">
+        <label for="progress">🎁 Rewards Progress</label>
+        <progress id="progress" value="0" max="100"></progress>
+      </div>
+    </div>
+
     <div class="card music-card">
       <h2>🎵 Music</h2>
       <button onclick="toggleMusic()">Play / Pause</button>
@@ -42,6 +56,8 @@
         <source src="https://cdn.pixabay.com/download/audio/2023/05/23/audio_67a4f71c3c.mp3?filename=relaxing-vlog-148160.mp3" type="audio/mpeg">
       </audio>
     </div>
+
+    <button onclick="window.print()" id="export-btn">🖨️ Export to PDF</button>
   </div>
 
   <script src="script.js"></script>
