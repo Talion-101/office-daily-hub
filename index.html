@@ -1,39 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Office Daily Hub</title>
+  <title>Office Daily Hub - Sarcastic Motivation</title>
   <link rel="stylesheet" href="style.css" />
 </head>
-<body class="default">
-  <div class="container">
+<body>
+  <div class="container centered">
     <h1 id="greeting"></h1>
     <div id="clock" class="time-box"></div>
 
     <div class="card">
       <h2>💬 Sarcastic Motivation</h2>
       <button id="motivation-btn" class="big-fun-btn">Need a Kick?</button>
-      <p id="daily-quote" style="display:none;"></p>
+      <p id="daily-quote" class="centered-text" style="display:none;"></p>
     </div>
-
-    <div class="card">
-      <h2>☕ Coffee Break Generator</h2>
-      <button id="coffee-btn" class="big-fun-btn">Give Me a Break!</button>
-      <p id="coffee-idea"></p>
-    </div>
-
-    <div class="card">
-      <h2>✅ Weekly Goals</h2>
-      <ul id="goals-list">
-        <li><label><input type="checkbox" data-id="goal1" /> Finalize Presentation</label></li>
-        <li><label><input type="checkbox" data-id="goal2" /> Submit Weekly Report</label></li>
-        <li><label><input type="checkbox" data-id="goal3" /> Team Meeting Preparation</label></li>
-        <li><label><input type="checkbox" data-id="goal4" /> Client Follow-ups</label></li>
-      </ul>
-    </div>
-
-    <button onclick="window.print()" id="export-btn">🖨️ Export to PDF</button>
   </div>
 
   <script src="script.js"></script>
