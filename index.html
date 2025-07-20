@@ -6,17 +6,14 @@
   <title>Office Daily Hub</title>
   <link rel="stylesheet" href="style.css"/>
 </head>
-<body>
+<body class="default">
   <div class="container">
     <h1 id="greeting"></h1>
     <div id="clock" class="time-box"></div>
 
     <div class="controls">
-      <label for="mood-select">🎨 Mood:</label>
-      <select id="mood-select" onchange="changeMood()">
-        <option value="default">Dark</option>
-        <option value="cute">Cute</option>
-      </select>
+      <span class="theme-btn" id="dark-btn" onclick="setTheme('default')">🌙</span>
+      <span class="theme-btn" id="cute-btn" onclick="setTheme('cute')">🧁</span>
       <button onclick="refreshQuote()">🔄 Refresh Quote</button>
     </div>
 
