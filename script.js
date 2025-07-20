@@ -3,9 +3,8 @@ const greeting = document.getElementById("greeting");
 const clock = document.getElementById("clock");
 const motivationBtn = document.getElementById("motivation-btn");
 const dailyQuote = document.getElementById("daily-quote");
-const surpriseHeading = document.getElementById("surprise-heading");
 
-// Sarcastic nicknames for greeting (chosen once per session)
+// Sarcastic nicknames for greeting (one per session, stored in sessionStorage)
 const sarcasticNames = [
   "Productivity Police",
   "Deadline Dodger",
@@ -155,7 +154,7 @@ function generateSarcasticQuote(clickCount) {
   return `${part1}${part2}, ${part3} ${part4}`;
 }
 
-// Select one nickname once on page load and store in sessionStorage
+// Pick nickname once on page load, store in sessionStorage
 function getOrSetNickname() {
   let storedName = sessionStorage.getItem("sarcastic_nickname");
   if (!storedName) {
@@ -165,7 +164,7 @@ function getOrSetNickname() {
   return storedName;
 }
 
-// Show greeting with random sarcastic nickname and proper time-based greeting
+// Show greeting with fixed nickname and time-based greeting
 function updateGreeting() {
   const now = new Date();
   const hour = now.getHours();
@@ -180,7 +179,7 @@ function updateGreeting() {
   greeting.innerText = `${timeGreeting}, ${name}!`;
 }
 
-// Update clock display
+// Update clock display (time/date only)
 function updateClock() {
   const now = new Date();
   clock.innerText = now.toLocaleString(undefined, {
@@ -233,15 +232,13 @@ motivationBtn.addEventListener("click", () => {
   changeButtonText();
 });
 
-// Periodic updates for greeting and clock
+// Periodic updates for greeting and clock (only greeting changes nickname on load)
 function update() {
-  updateGreeting();
   updateClock();
 }
-
 setInterval(update, 1000);
 
-// Initial page load actions
+// Initial page load
 updateGreeting();
 updateClock();
 showDailyQuote();
