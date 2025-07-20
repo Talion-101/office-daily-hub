@@ -1,101 +1,76 @@
-// Live Clock
-function updateClock() {
-  const now = new Date();
-  document.getElementById("clock").textContent = now.toLocaleTimeString();
-}
-setInterval(updateClock, 1000);
-updateClock();
+// Daily greeting
+const greeting = document.getElementById("greeting");
+const userName = "Isuru";
+const hour = new Date().getHours();
+let greetText = "Hello";
+if (hour < 12) greetText = "Good Morning";
+else if (hour < 18) greetText = "Good Afternoon";
+else greetText = "Good Evening";
+greeting.innerText = `${greetText}, ${userName}!`;
 
-// To-Do List
-function addTodo() {
-  const input = document.getElementById("todo-input");
-  const task = input.value.trim();
-  if (task) {
-    const ul = document.getElementById("todo-list");
-    const li = document.createElement("li");
-    li.textContent = task;
-    li.onclick = () => {
-      li.remove();
-      saveTodos();
-    };
-    ul.appendChild(li);
-    input.value = "";
-    saveTodos();
-  }
-}
-
-function saveTodos() {
-  const items = [];
-  document.querySelectorAll("#todo-list li").forEach(li => items.push(li.textContent));
-  localStorage.setItem("todos", JSON.stringify(items));
-}
-
-function loadTodos() {
-  const items = JSON.parse(localStorage.getItem("todos") || "[]");
-  items.forEach(task => {
-    const li = document.createElement("li");
-    li.textContent = task;
-    li.onclick = () => {
-      li.remove();
-      saveTodos();
-    };
-    document.getElementById("todo-list").appendChild(li);
-  });
-}
-loadTodos();
-
-// Daily Quote
-const quotes = [
-  "Believe in yourself!",
-  "You are capable of amazing things.",
-  "Small steps lead to big success.",
-  "Be kind to your mind.",
-  "One day or day one? You decide.",
-  "Progress over perfection.",
-  "Your energy introduces you before you even speak."
-];
-
-function newQuote() {
-  const q = quotes[Math.floor(Math.random() * quotes.length)];
-  document.getElementById("quote").textContent = q;
-}
-newQuote();
-
-// Sticky Note
-const note = document.getElementById("note");
-note.value = localStorage.getItem("note") || "";
-note.addEventListener("input", () => {
-  localStorage.setItem("note", note.value);
-});
-
-// Mood Theme Switcher
+// Mood selector
 function changeMood() {
   const mood = document.getElementById("mood-select").value;
-  document.body.className = ""; // Reset
+  document.body.className = "";
   if (mood !== "default") {
     document.body.classList.add(`mood-${mood}`);
   }
   localStorage.setItem("selectedMood", mood);
 }
-
 const savedMood = localStorage.getItem("selectedMood");
 if (savedMood) {
   document.getElementById("mood-select").value = savedMood;
   changeMood();
 }
 
-// Background Music Toggle
+// Background music
 let isMusicPlaying = false;
 const audio = document.getElementById("bg-music");
-const btn = document.getElementById("music-btn");
-
+const musicBtn = document.getElementById("music-btn");
 function toggleMusic() {
   if (isMusicPlaying) {
     audio.pause();
-    btn.textContent = "🎵 Play Music";
+    musicBtn.textContent = "🎵 Play Music";
   } else {
     audio.play();
-    btn.textContent = "🔇 Pause Music";
+    musicBtn.textContent = "🔇 Pause Music";
   }
   isMusicPlaying = !isMusicPlaying;
 }
+
+// To-do list
+const taskList = document.getElementById("task-list");
+function addTask() {
+  const input = document.getElementById("task-input");
+  if (input.value.trim() !== "") {
+    const li = document.createElement("li");
+    li.textContent = input.value;
+    taskList.appendChild(li);
+    input.value = "";
+  }
+}
+
+// Daily quote
+const quotes = [
+  "Stay positive, work hard, make it happen.",
+  "Believe you can and you're halfway there.",
+  "Every day is a fresh start.",
+  "Progress, not perfection."
+];
+document.getElementById("quote").innerText = quotes[Math.floor(Math.random() * quotes.length)];
+
+// Sticky note
+const sticky = document.getElementById("sticky-note");
+sticky.value = localStorage.getItem("stickyNote") || "";
+sticky.addEventListener("input", () => {
+  localStorage.setItem("stickyNote", sticky.value);
+});
+
+// Random background images (optional instead of mood)
+const backgrounds = [
+  "url('https://source.unsplash.com/1600x900/?nature')",
+  "url('https://source.unsplash.com/1600x900/?sky')",
+  "url('https://source.unsplash.com/1600x900/?galaxy')",
+  "url('https://source.unsplash.com/1600x900/?abstract')"
+];
+document.body.style.backgroundImage = backgrounds[Math.floor(Math.random() * backgrounds.length)];
