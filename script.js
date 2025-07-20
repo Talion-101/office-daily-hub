@@ -14,7 +14,10 @@ function addTodo() {
     const ul = document.getElementById("todo-list");
     const li = document.createElement("li");
     li.textContent = task;
-    li.onclick = () => li.remove(); // click to remove
+    li.onclick = () => {
+      li.remove();
+      saveTodos();
+    };
     ul.appendChild(li);
     input.value = "";
     saveTodos();
@@ -23,16 +26,21 @@ function addTodo() {
 
 function saveTodos() {
   const items = [];
-  document.querySelectorAll("#todo-list li").forEach(li => items.push(li.textContent));
+  document.querySelectorAll("#todo-list li").forEach((li) =>
+    items.push(li.textContent)
+  );
   localStorage.setItem("todos", JSON.stringify(items));
 }
 
 function loadTodos() {
   const items = JSON.parse(localStorage.getItem("todos") || "[]");
-  items.forEach(task => {
+  items.forEach((task) => {
     const li = document.createElement("li");
     li.textContent = task;
-    li.onclick = () => li.remove();
+    li.onclick = () => {
+      li.remove();
+      saveTodos();
+    };
     document.getElementById("todo-list").appendChild(li);
   });
 }
@@ -44,7 +52,9 @@ const quotes = [
   "You are capable of amazing things.",
   "Small steps lead to big success.",
   "Be kind to your mind.",
-  "One day or day one? You decide."
+  "One day or day one? You decide.",
+  "Progress over perfection.",
+  "Your energy introduces you before you even speak.",
 ];
 
 function newQuote() {
