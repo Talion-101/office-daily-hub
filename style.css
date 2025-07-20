@@ -1,10 +1,10 @@
-/* Compact goofy style with breathing background animation */
-@keyframes breathing {
+/* Smaller, compact goofy style with breathing background */
+@keyframes breathingBackground {
   0%, 100% {
-    background-color: #1b0030;
+    background-color: #1b0030; /* original dark purple */
   }
   50% {
-    background-color: #3a004e;
+    background-color: #300040; /* slightly lighter purple */
   }
 }
 
@@ -12,8 +12,10 @@ body {
   font-family: 'Comic Sans MS', cursive, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #1b0030;
-  animation: breathing 6s ease-in-out infinite;
+
+  /* Breathing background animation */
+  animation: breathingBackground 6s ease-in-out infinite;
+
   color: #ff69b4;
   display: flex;
   justify-content: center;
@@ -35,7 +37,7 @@ body {
 }
 
 h1#greeting {
-  font-size: 2.2rem;
+  font-size: 2rem;
   margin-bottom: 6px;
   color: #ff85c1;
   text-shadow: 1px 1px 5px #ff00aa;
@@ -59,17 +61,16 @@ h1#greeting {
 }
 
 .card h2 {
-  font-size: 1.8rem;
+  font-size: 1.7rem;
   margin-bottom: 20px;
   color: #ff4ab0;
   user-select: none;
   letter-spacing: 0.08em;
   text-shadow: 0 0 6px #ff3ba2;
-  transition: color 0.3s ease;
 }
 
 .big-fun-btn {
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   padding: 14px 35px;
   background: linear-gradient(135deg, #ff8acc, #ff3a9a);
   border: none;
@@ -80,7 +81,7 @@ h1#greeting {
   letter-spacing: 0.1em;
   transition: background 0.25s ease, transform 0.15s ease;
   user-select: none;
-  margin-bottom: 10px;
+  margin-bottom: 25px;
   box-shadow: 0 5px 15px #ff3a9a;
 }
 
@@ -89,93 +90,44 @@ h1#greeting {
   transform: scale(1.07);
 }
 
-.small-fun-btn {
-  font-size: 1rem;
-  padding: 8px 18px;
-  background: linear-gradient(135deg, #ff61a6, #ff2a75);
-  border: none;
-  border-radius: 14px;
-  cursor: pointer;
-  color: #fff;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  transition: background 0.25s ease, transform 0.15s ease;
-  user-select: none;
-  margin: 5px 8px;
-  box-shadow: 0 3px 10px #ff2a75;
-}
-
-.small-fun-btn:hover {
-  background: linear-gradient(135deg, #ff2a75, #ff61a6);
-  transform: scale(1.05);
-}
-
 #daily-quote {
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   font-weight: 700;
   line-height: 1.3;
   color: #ff94c9;
-  min-height: 90px;
+  min-height: 70px;
   user-select: text;
   white-space: pre-line;
   font-family: 'Comic Sans MS', cursive, sans-serif;
-  transition: all 0.3s ease;
 }
 
-#loading-text {
-  font-family: 'Comic Sans MS', cursive, sans-serif;
-  font-weight: 600;
-}
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .container {
+    max-width: 320px;
+    padding: 15px 10px;
+  }
 
-.meter-container {
-  margin-top: 15px;
-  color: #ff69b4;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-}
+  h1#greeting {
+    font-size: 1.6rem;
+  }
 
-progress {
-  width: 100%;
-  height: 20px;
-  border-radius: 15px;
-  appearance: none;
-  -webkit-appearance: none;
-  background-color: #ff4ab0;
-  box-shadow: 0 0 8px #ff3ba2;
-}
+  .time-box {
+    font-size: 1rem;
+  }
 
-progress::-webkit-progress-bar {
-  background-color: #ff4ab0;
-  border-radius: 15px;
-}
+  .card h2 {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+  }
 
-progress::-webkit-progress-value {
-  background: linear-gradient(135deg, #ff8acc, #ff3a9a);
-  border-radius: 15px;
-  transition: width 0.3s ease;
-}
+  .big-fun-btn {
+    font-size: 1.3rem;
+    padding: 12px 28px;
+  }
 
-progress::-moz-progress-bar {
-  background: linear-gradient(135deg, #ff8acc, #ff3a9a);
-  border-radius: 15px;
-  transition: width 0.3s ease;
-}
-
-#user-input {
-  padding: 10px;
-  font-size: 1.1rem;
-  border-radius: 12px;
-  border: none;
-  margin-bottom: 10px;
-  width: 80%;
-  max-width: 280px;
-  box-shadow: 0 0 8px #ff61a6;
-  font-family: 'Comic Sans MS', cursive, sans-serif;
-  font-weight: 700;
-  text-align: center;
-  color: #333;
-}
-
-#input-section {
-  margin-bottom: 15px;
+  #daily-quote {
+    font-size: 1.2rem;
+    min-height: 60px;
+  }
 }
