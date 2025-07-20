@@ -1,4 +1,4 @@
-// Greeting + Clock (no timezone)
+// Greeting + Clock (local time, no timezone)
 const greeting = document.getElementById("greeting");
 const clock = document.getElementById("clock");
 const userName = "Isuru";
@@ -23,14 +23,15 @@ function updateClock() {
 setInterval(updateClock, 1000);
 updateClock();
 
-// Theme toggle (unchanged)
+// Theme toggle
 function setTheme(mode) {
   document.body.className = mode;
   document.getElementById("dark-btn").classList.toggle("active", mode === "default");
   document.getElementById("cute-btn").classList.toggle("active", mode === "cute");
 }
+setTheme('default'); // default theme on load
 
-// Motivation
+// Motivation quotes
 const quotes = [
   "The future depends on what you do today. — Gandhi",
   "Success is not final, failure is not fatal. — Churchill",
@@ -49,17 +50,17 @@ function refreshQuote() {
     localStorage.setItem(`quote_${today}`, quote);
   }
   quoteBox.innerText = quote;
-  quoteBox.style.display = "block"; // Make sure quote is visible
+  quoteBox.style.display = "block"; // Show quote
 }
 quoteBtn.addEventListener("click", refreshQuote);
-refreshQuote(); // Load quote on page load
+refreshQuote();
 
-// --- Interactive Calendar ---
+// Interactive Calendar + Sticky Notes
 const calendarGrid = document.getElementById("calendar-grid");
 const stickyNote = document.getElementById("sticky-note");
 const noteStatus = document.getElementById("note-status");
 
-// Holidays example (you can expand this)
+// Example Sri Lankan holidays (expandable)
 const holidays = {
   "2025-01-15": "Tamil Thai Pongal Day",
   "2025-02-04": "Independence Day",
@@ -69,7 +70,7 @@ const holidays = {
   "2025-06-20": "Poson Full Moon Poya Day"
 };
 
-let selectedDate = new Date(); // Start with today
+let selectedDate = new Date();
 
 function renderCalendar(date = new Date()) {
   const year = date.getFullYear();
@@ -79,14 +80,14 @@ function renderCalendar(date = new Date()) {
 
   calendarGrid.innerHTML = "";
 
-  // Add blank slots for days before month start
+  // Empty slots before 1st day
   for (let i = 0; i < firstDay; i++) {
     const blankDiv = document.createElement("div");
     blankDiv.classList.add("day-box", "empty");
     calendarGrid.appendChild(blankDiv);
   }
 
-  // Add day boxes
+  // Days with click handlers
   for (let d = 1; d <= daysInMonth; d++) {
     const dayDiv = document.createElement("div");
     dayDiv.classList.add("day-box");
@@ -95,13 +96,11 @@ function renderCalendar(date = new Date()) {
     dayDiv.textContent = d;
     dayDiv.title = isoDate;
 
-    // Mark holidays
     if (holidays[isoDate]) {
       dayDiv.classList.add("holiday");
       dayDiv.title += ` - ${holidays[isoDate]}`;
     }
 
-    // Highlight selected day
     if (
       selectedDate.getFullYear() === year &&
       selectedDate.getMonth() === month &&
@@ -112,7 +111,7 @@ function renderCalendar(date = new Date()) {
 
     dayDiv.addEventListener("click", () => {
       selectedDate = dayDate;
-      renderCalendar(selectedDate); // rerender to update highlight
+      renderCalendar(selectedDate);
       loadNoteForDate(selectedDate);
     });
 
@@ -121,7 +120,6 @@ function renderCalendar(date = new Date()) {
 }
 renderCalendar(selectedDate);
 
-// Load note for selected date
 function loadNoteForDate(date) {
   const key = date.toDateString();
   stickyNote.value = localStorage.getItem(`note_${key}`) || "";
@@ -130,7 +128,6 @@ function loadNoteForDate(date) {
 }
 loadNoteForDate(selectedDate);
 
-// Save note on input with timestamp
 stickyNote.addEventListener("input", () => {
   const key = selectedDate.toDateString();
   localStorage.setItem(`note_${key}`, stickyNote.value);
