@@ -2,39 +2,33 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Sarcasm Central — The Ultimate Roast</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sarcastic Motivation</title>
   <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Rubik+Doodle+Shadow&display=swap" rel="stylesheet">
 </head>
-<body class="default">
+<body>
   <div class="container">
     <h1 id="greeting"></h1>
-    <div id="clock" class="time-box"></div>
+    <h2 id="nickname"></h2>
 
-    <div class="card">
-      <h2 id="surprise-heading">Ready to feel the burn?</h2>
+    <div class="quote-box">
+      <p id="quote"></p>
+      <button id="generate">I Definitely Need This</button>
+    </div>
 
-      <div id="input-section">
-        <input id="user-input" type="text" placeholder="Give me a name or phrase..." maxlength="30" />
-        <button id="personal-roast-btn" class="small-fun-btn" title="Generate a personalized roast">Roast me personally</button>
+    <div class="meter-box">
+      <div class="sarcasm-meter">
+        <div class="fill"></div>
       </div>
+      <p class="sarcasm-level" id="sarcasmLevel">Level: Barely offensive...</p>
+    </div>
 
-      <button id="motivation-btn" class="big-fun-btn">Give me hell!</button>
-      <button id="sorry-btn" class="small-fun-btn" style="display:none;">I’m Sorry (Please No More!)</button>
-
-      <p id="loading-text" style="display:none; font-style: italic; margin: 10px 0; color: #ff61a6;"></p>
-      <p id="daily-quote" style="min-height: 90px;"></p>
-
-      <div class="meter-container">
-        <label for="sarcasm-meter">Sarcasm Meter:</label>
-        <progress id="sarcasm-meter" value="0" max="100"></progress>
-        <p id="meter-label">Just warming up...</p>
-      </div>
+    <div class="coffee-box">
+      <h3>Coffee Break Idea:</h3>
+      <p id="coffeeIdea"></p>
     </div>
   </div>
-
-  <audio id="laugh-sound" src="https://freesound.org/data/previews/353/353233_5121236-lq.mp3" preload="auto"></audio>
-  <audio id="buzzer-sound" src="https://freesound.org/data/previews/256/256113_3263906-lq.mp3" preload="auto"></audio>
 
   <script src="script.js"></script>
 </body>
