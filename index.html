@@ -11,21 +11,21 @@
     <h1 id="greeting"></h1>
     <div id="clock" class="time-box"></div>
 
+    <div class="card">
+      <h2>💬 Daily Motivation</h2>
+      <button id="generate-quote" onclick="refreshQuote()">💡 Inspire Me!</button>
+      <p id="daily-quote" style="display:none;"></p>
+    </div>
+
     <div class="controls">
       <span class="theme-btn" id="dark-btn" onclick="setTheme('default')">🌙</span>
       <span class="theme-btn" id="cute-btn" onclick="setTheme('cute')">🧁</span>
-      <button onclick="refreshQuote()">🔄 Refresh Quote</button>
     </div>
 
     <div class="card">
-      <h2>📅 Sri Lankan Calendar</h2>
+      <h2>📅 Calendar</h2>
       <div id="calendar-grid"></div>
       <div id="holiday"></div>
-    </div>
-
-    <div class="card">
-      <h2>💬 Daily Motivation</h2>
-      <p id="daily-quote"></p>
     </div>
 
     <div class="card">
