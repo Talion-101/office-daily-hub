@@ -232,10 +232,13 @@ motivationBtn.addEventListener("click", () => {
   changeButtonText();
 });
 
+// Periodic updates for greeting and clock (only greeting changes nickname on load)
+function update() {
+  updateClock();
+}
+setInterval(update, 1000);
+
 // Initial page load
 updateGreeting();
 updateClock();
 showDailyQuote();
-
-// Update clock every second
-setInterval(updateClock, 1000);
