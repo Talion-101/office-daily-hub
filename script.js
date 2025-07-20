@@ -5,7 +5,7 @@ const motivationBtn = document.getElementById("motivation-btn");
 const dailyQuote = document.getElementById("daily-quote");
 const surpriseHeading = document.getElementById("surprise-heading");
 
-// Sarcastic nicknames for greeting
+// Sarcastic nicknames for greeting (chosen once per session)
 const sarcasticNames = [
   "Productivity Police",
   "Deadline Dodger",
@@ -155,6 +155,16 @@ function generateSarcasticQuote(clickCount) {
   return `${part1}${part2}, ${part3} ${part4}`;
 }
 
+// Select one nickname once on page load and store in sessionStorage
+function getOrSetNickname() {
+  let storedName = sessionStorage.getItem("sarcastic_nickname");
+  if (!storedName) {
+    storedName = sarcasticNames[Math.floor(Math.random() * sarcasticNames.length)];
+    sessionStorage.setItem("sarcastic_nickname", storedName);
+  }
+  return storedName;
+}
+
 // Show greeting with random sarcastic nickname and proper time-based greeting
 function updateGreeting() {
   const now = new Date();
@@ -166,7 +176,7 @@ function updateGreeting() {
   else if (hour >= 17 && hour < 21) timeGreeting = "Good Evening";
   else timeGreeting = "Burning Midnight Oil";
 
-  const name = sarcasticNames[Math.floor(Math.random() * sarcasticNames.length)];
+  const name = getOrSetNickname();
   greeting.innerText = `${timeGreeting}, ${name}!`;
 }
 
