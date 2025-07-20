@@ -1,66 +1,102 @@
-const quotes = [
-  "Keep going, you're almost at the point where no one notices your effort.",
-  "Believe in yourself. Someone has to.",
-  "Dream big. It’s the cheapest thing you can afford.",
-  "You can do anything you set your mind to — except probably this.",
-  "You're doing amazing...ly average.",
-  "Another day, another existential crisis.",
-  "Your potential is endless, much like your procrastination.",
-  "Hard work pays off… just not today.",
-  "Mistakes are proof that you’re trying. So why stop now?",
-  "You’re the reason this app exists.",
-  "Inspiring isn’t it? No? Oh well."
+const sarcasmQuotes = [
+  "You're doing amazing... at wasting time.",
+  "Keep going! You're setting the bar lower every day.",
+  "Productivity? Never heard of her.",
+  "Hard work pays off... just not for you.",
+  "Your potential is unlimited — and untouched.",
+  "Confidence is key, which explains a lot.",
+  "At least your chair supports you.",
+  "Dream big, nap often.",
+  "You bring something special to the team... confusion.",
+  "You miss 100% of the shots you don't take — and the ones you do.",
+];
+
+const coffeeIdeas = [
+  "Stare into your coffee like it holds the answers.",
+  "Take a 15-minute break to contemplate your life choices.",
+  "Stretch your legs... to the snack drawer.",
+  "Make a coffee so strong it files your taxes.",
+  "Walk around like you're solving world peace.",
+  "Pretend you're in a productivity montage.",
+  "Boil water, forget why. Repeat.",
+  "Grab a donut, regret it later.",
+  "Ask someone if they want coffee — secretly hope they say no.",
+  "Dramatically sigh until someone notices."
+];
+
+const buttonLabels = [
+  "💥 Hit Me Again",
+  "😩 I Hate Myself",
+  "🎯 Self Sabotage Time",
+  "🤡 Roast Me",
+  "🥲 Another One Please",
+  "🧠 Fuel My Doubts",
+  "🔥 Why Am I Like This?",
+  "💤 Inject Sarcasm",
+  "👀 Is This Helping?",
+  "🫠 Try Me Again"
 ];
 
 const nicknames = [
-  "Captain Mediocre", "Productivity Potato", "Procrastination Guru",
-  "Sarcasm Magnet", "Ambition Accident", "Intern of Doom",
-  "Sleeping Sensei", "The Chosen Sloth", "Dream Crusher Deluxe"
+  "Captain Chaos", "Drama Llama", "Keyboard Warrior", "Meeting Enthusiast", 
+  "Snack Destroyer", "Midnight Coder", "Professional Scroller", "Sir Naps-a-Lot",
+  "Chief Procrastinator", "Queen of Tabs", "Browser Overlord"
 ];
 
-const buttonTexts = [
-  "Try Again?", "Hurt Me More", "Crave Pain?", "Punish Yourself",
-  "More Fuel?", "Bring It On", "Roast Me", "Why Am I Here?", "Last One...maybe"
-];
+let sarcasmIndex = 0;
 
-let sarcasmLevel = 0;
+// Get DOM elements
+const sarcasmText = document.getElementById("sarcasmText");
+const motivateBtn = document.getElementById("motivateBtn");
+const sarcasmMeterFill = document.getElementById("sarcasmMeterFill");
+const coffeeBtn = document.getElementById("coffeeBtn");
+const coffeeIdea = document.getElementById("coffeeIdea");
+const greeting = document.getElementById("greeting");
+const nickname = document.getElementById("nickname");
 
-function getGreeting() {
-  const hour = new Date().getHours();
-  if (hour < 12) return "Good Morning";
-  if (hour < 18) return "Good Afternoon";
-  return "Good Evening";
-}
+// Generate nickname on page load
+window.onload = () => {
+  const time = new Date().getHours();
+  const randomNick = nicknames[Math.floor(Math.random() * nicknames.length)];
 
-function getRandomItem(arr) {
-  return arr[Math.floor(Math.random() * arr.length)];
-}
-
-function getNickname() {
-  if (!localStorage.getItem("nickname")) {
-    localStorage.setItem("nickname", getRandomItem(nicknames));
+  if (time < 12) {
+    greeting.innerText = `Good morning, ${randomNick}`;
+  } else if (time < 18) {
+    greeting.innerText = `Good afternoon, ${randomNick}`;
+  } else {
+    greeting.innerText = `Good evening, ${randomNick}`;
   }
-  return localStorage.getItem("nickname");
-}
+};
 
-document.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("greeting").textContent = getGreeting();
-  document.getElementById("nickname").textContent = `Hey ${getNickname()},`;
+// Update sarcasm on click
+motivateBtn.addEventListener("click", () => {
+  sarcasmIndex++;
+  const newQuote = sarcasmQuotes[Math.floor(Math.random() * sarcasmQuotes.length)];
+  sarcasmText.innerText = newQuote + " " + generateExtraSarcasm();
+  
+  const fill = Math.min(100, sarcasmIndex * 10);
+  sarcasmMeterFill.style.width = `${fill}%`;
 
-  const inspireBtn = document.getElementById("inspireBtn");
-  const quoteEl = document.getElementById("quote");
-  const sarcasmMeter = document.getElementById("sarcasmMeter");
-
-  inspireBtn.addEventListener("click", () => {
-    const newQuote = getRandomItem(quotes);
-    quoteEl.textContent = newQuote;
-    sarcasmLevel = Math.min(100, sarcasmLevel + Math.floor(Math.random() * 20) + 10);
-    sarcasmMeter.style.width = `${sarcasmLevel}%`;
-
-    if (sarcasmLevel >= 100) {
-      sarcasmLevel = 0;
-    }
-
-    inspireBtn.textContent = getRandomItem(buttonTexts);
-  });
+  const newLabel = buttonLabels[Math.floor(Math.random() * buttonLabels.length)];
+  motivateBtn.innerText = newLabel;
 });
+
+// Update coffee idea
+coffeeBtn.addEventListener("click", () => {
+  const idea = coffeeIdeas[Math.floor(Math.random() * coffeeIdeas.length)];
+  coffeeIdea.innerText = idea;
+});
+
+// Generate more pain
+function generateExtraSarcasm() {
+  const extra = [
+    "Honestly, iconic.",
+    "Your boss is definitely crying somewhere.",
+    "Inspirational... to no one.",
+    "You’re basically a case study.",
+    "Goals. Redefined.",
+    "And yet... here we are."
+  ];
+  const index = Math.floor(Math.random() * extra.length);
+  return extra[index];
+}
