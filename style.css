@@ -7,18 +7,15 @@ body {
   background-color: #0f0c29;
 }
 
-body.light {
-  background: linear-gradient(to right, #e0eafc, #cfdef3);
-  color: #222;
-}
-
 .container {
   padding: 30px;
   max-width: 900px;
   margin: auto;
 }
 
-h1, .time-box, .controls {
+h1,
+.time-box,
+.controls {
   text-align: center;
 }
 
@@ -34,22 +31,11 @@ h1, .time-box, .controls {
 .theme-btn {
   font-size: 1.5em;
   margin: 0 15px;
-  cursor: pointer;
+  cursor: default;
   padding: 5px 15px;
   border-radius: 8px;
-  background-color: rgba(255,255,255,0.1);
+  background-color: rgba(255, 255, 255, 0.1);
   user-select: none;
-  transition: background-color 0.3s ease;
-}
-
-.theme-btn:hover {
-  background-color: rgba(255,255,255,0.25);
-}
-
-.theme-btn.active {
-  background-color: #ff9bcb;
-  color: #222;
-  font-weight: bold;
 }
 
 .card {
@@ -60,34 +46,38 @@ h1, .time-box, .controls {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
 }
 
-textarea {
-  width: 100%;
-  padding: 10px;
-  height: 120px;
-  border-radius: 8px;
+.big-fun-btn {
+  font-size: 1.8em;
+  padding: 15px 30px;
+  background: linear-gradient(135deg, #ff9bcb, #ff61a6);
   border: none;
-  resize: none;
-  background-color: #222;
-  color: #fff;
-  box-shadow: inset 0 0 10px #444;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-body.light textarea {
-  background-color: #f3f3f3;
-  color: #222;
-  box-shadow: inset 0 0 10px #ccc;
-}
-
-button {
-  padding: 10px 20px;
-  border: none;
-  background-color: #ff9bcb;
-  border-radius: 8px;
+  border-radius: 12px;
   cursor: pointer;
-  color: white;
-  margin: 5px;
-  font-weight: bold;
+  color: #222;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  transition: background 0.3s ease, transform 0.2s ease;
+  user-select: none;
+  margin-top: 10px;
+}
+
+.big-fun-btn:hover {
+  background: linear-gradient(135deg, #ff61a6, #ff9bcb);
+  transform: scale(1.05);
+}
+
+#daily-quote {
+  font-style: italic;
+  font-size: 1.2em;
+  margin-top: 15px;
+  color: #ff9bcb;
+}
+
+#coffee-idea {
+  margin-top: 15px;
+  font-style: italic;
+  font-size: 1.2em;
+  color: #ff9bcb;
 }
 
 #goals-list {
@@ -100,21 +90,9 @@ button {
   font-size: 1.1em;
 }
 
-#daily-quote {
-  font-style: italic;
-  font-size: 1.1em;
-  margin-top: 15px;
-  color: #ff9bcb;
-}
-
-#note-status {
-  margin-top: 10px;
-  font-size: 0.9em;
-  color: #bbb;
-}
-
-body.light #daily-quote {
-  color: #d33c6f;
+button#print-btn {
+  margin-top: 30px;
+  background-color: #ff9bcb;
 }
 
 @media print {
@@ -122,7 +100,9 @@ body.light #daily-quote {
     background: none !important;
     color: #000 !important;
   }
-  .card, button, .controls {
+  .card,
+  button,
+  .controls {
     display: none;
   }
 }
