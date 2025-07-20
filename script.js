@@ -3,8 +3,9 @@ const greeting = document.getElementById("greeting");
 const clock = document.getElementById("clock");
 const motivationBtn = document.getElementById("motivation-btn");
 const dailyQuote = document.getElementById("daily-quote");
+const surpriseHeading = document.getElementById("surprise-heading");
 
-// Sarcastic nicknames or funny titles instead of real name
+// Sarcastic nicknames for greeting
 const sarcasticNames = [
   "Productivity Police",
   "Deadline Dodger",
@@ -16,32 +17,28 @@ const sarcasticNames = [
   "Spreadsheet Wizard",
   "Procrastination Pro",
   "Workplace Legend",
+  "Office Ghost",
+  "Nap Specialist",
+  "Reply-All Master",
+  "The Silent Screamer",
+  "Captain Avoidance"
 ];
 
-// Greeting with sarcastic nickname, updates every second for fun
-function updateGreeting() {
-  const now = new Date();
-  const hour = now.getHours();
-  let greetText = hour < 12 ? "Good Morning" : hour < 18 ? "Good Afternoon" : "Good Evening";
-  const name = sarcasticNames[Math.floor(Math.random() * sarcasticNames.length)];
-  greeting.innerText = `${greetText}, ${name}!`;
-}
+// Fun button texts that change every click
+const buttonTexts = [
+  "Give me hell!",
+  "Hit me with your worst!",
+  "Burn me, baby!",
+  "Roast me now!",
+  "More pain, please!",
+  "Make it hurt!",
+  "Unleash the sarcasm!",
+  "I can take it!",
+  "Spare no feelings!",
+  "Sarcasm me up!"
+];
 
-// Clock display (local date/time, no timezone)
-function updateClock() {
-  const now = new Date();
-  clock.innerText = now.toLocaleString(undefined, {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-    hour: "numeric",
-    minute: "numeric",
-    second: "numeric",
-  });
-}
-
-// Phrase pools per sarcasm level
+// Phrase pools for escalating sarcasm levels
 const phrasePools = [
   { // Level 0: mild sarcasm
     openers: ["Heads up, ", "Just so you know, ", "FYI, ", "Word of advice, ", "Warning: "],
@@ -137,15 +134,15 @@ const phrasePools = [
   },
 ];
 
-// Get sarcasm level based on click count
+// Get sarcasm level by click count
 function getSarcasmLevel(clickCount) {
   if (clickCount < 3) return 0;
   if (clickCount < 6) return 1;
   if (clickCount < 10) return 2;
-  return 3; // max level
+  return 3;
 }
 
-// Generate sarcastic quote based on level
+// Generate sarcastic quote for given click count
 function generateSarcasticQuote(clickCount) {
   const level = getSarcasmLevel(clickCount);
   const pool = phrasePools[level];
@@ -158,7 +155,42 @@ function generateSarcasticQuote(clickCount) {
   return `${part1}${part2}, ${part3} ${part4}`;
 }
 
-// Show daily quote or use stored one
+// Show greeting with random sarcastic nickname and proper time-based greeting
+function updateGreeting() {
+  const now = new Date();
+  const hour = now.getHours();
+  let timeGreeting;
+
+  if (hour >= 5 && hour < 12) timeGreeting = "Good Morning";
+  else if (hour >= 12 && hour < 17) timeGreeting = "Good Afternoon";
+  else if (hour >= 17 && hour < 21) timeGreeting = "Good Evening";
+  else timeGreeting = "Burning Midnight Oil";
+
+  const name = sarcasticNames[Math.floor(Math.random() * sarcasticNames.length)];
+  greeting.innerText = `${timeGreeting}, ${name}!`;
+}
+
+// Update clock display
+function updateClock() {
+  const now = new Date();
+  clock.innerText = now.toLocaleString(undefined, {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric",
+  });
+}
+
+// Change button text to a random sarcastic phrase
+function changeButtonText() {
+  const newText = buttonTexts[Math.floor(Math.random() * buttonTexts.length)];
+  motivationBtn.innerText = newText;
+}
+
+// Show stored quote or generate new one on page load
 function showDailyQuote() {
   const today = new Date().toDateString();
   let storedQuote = localStorage.getItem("sarcastic_quote_" + today);
@@ -174,7 +206,7 @@ function showDailyQuote() {
   dailyQuote.style.display = "block";
 }
 
-// Handle button click: increase click count, generate harsher quote
+// On button click: increase click count, generate harsher quote, change button text
 motivationBtn.addEventListener("click", () => {
   const today = new Date().toDateString();
   let clickCount = parseInt(localStorage.getItem("sarcastic_clicks_" + today)) || 0;
@@ -187,9 +219,11 @@ motivationBtn.addEventListener("click", () => {
 
   dailyQuote.innerText = newQuote;
   dailyQuote.style.display = "block";
+
+  changeButtonText();
 });
 
-// Update greeting and clock every second
+// Periodic updates for greeting and clock
 function update() {
   updateGreeting();
   updateClock();
@@ -197,7 +231,7 @@ function update() {
 
 setInterval(update, 1000);
 
-// Initial load
+// Initial page load actions
 updateGreeting();
 updateClock();
 showDailyQuote();
