@@ -1,9 +1,21 @@
-/* Smaller, compact goofy style */
+/* Smaller, compact goofy style with breathing background */
+@keyframes breathingBackground {
+  0%, 100% {
+    background-color: #1b0030; /* original dark purple */
+  }
+  50% {
+    background-color: #300040; /* slightly lighter purple */
+  }
+}
+
 body {
   font-family: 'Comic Sans MS', cursive, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #1b0030;
+
+  /* Breathing background animation */
+  animation: breathingBackground 6s ease-in-out infinite;
+
   color: #ff69b4;
   display: flex;
   justify-content: center;
@@ -11,7 +23,6 @@ body {
   min-height: 100vh;
   text-align: center;
   user-select: none;
-  padding: 10px;
 }
 
 .container {
@@ -26,7 +37,7 @@ body {
 }
 
 h1#greeting {
-  font-size: 1.8rem;
+  font-size: 2rem;
   margin-bottom: 6px;
   color: #ff85c1;
   text-shadow: 1px 1px 5px #ff00aa;
@@ -34,7 +45,7 @@ h1#greeting {
 }
 
 .time-box {
-  font-size: 1rem;
+  font-size: 1.1rem;
   margin-bottom: 20px;
   color: #ffa3cf;
   font-weight: 600;
@@ -50,7 +61,7 @@ h1#greeting {
 }
 
 .card h2 {
-  font-size: 1.4rem;
+  font-size: 1.7rem;
   margin-bottom: 20px;
   color: #ff4ab0;
   user-select: none;
@@ -59,8 +70,8 @@ h1#greeting {
 }
 
 .big-fun-btn {
-  font-size: 1.3rem;
-  padding: 12px 30px;
+  font-size: 1.5rem;
+  padding: 14px 35px;
   background: linear-gradient(135deg, #ff8acc, #ff3a9a);
   border: none;
   border-radius: 18px;
@@ -80,7 +91,7 @@ h1#greeting {
 }
 
 #daily-quote {
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   font-weight: 700;
   line-height: 1.3;
   color: #ff94c9;
@@ -90,31 +101,33 @@ h1#greeting {
   font-family: 'Comic Sans MS', cursive, sans-serif;
 }
 
-/* Responsive for smaller screens */
+/* Responsive adjustments */
 @media (max-width: 480px) {
   .container {
     max-width: 320px;
+    padding: 15px 10px;
   }
 
   h1#greeting {
-    font-size: 1.3rem;
+    font-size: 1.6rem;
   }
 
   .time-box {
-    font-size: 0.9rem;
+    font-size: 1rem;
   }
 
   .card h2 {
-    font-size: 1.1rem;
+    font-size: 1.4rem;
+    margin-bottom: 15px;
   }
 
   .big-fun-btn {
-    font-size: 1.1rem;
-    padding: 10px 25px;
+    font-size: 1.3rem;
+    padding: 12px 28px;
   }
 
   #daily-quote {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     min-height: 60px;
   }
 }
