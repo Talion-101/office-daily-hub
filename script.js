@@ -1,4 +1,4 @@
-// Daily greeting
+// Greeting
 const greeting = document.getElementById("greeting");
 const userName = "Isuru";
 const hour = new Date().getHours();
@@ -8,69 +8,58 @@ else if (hour < 18) greetText = "Good Afternoon";
 else greetText = "Good Evening";
 greeting.innerText = `${greetText}, ${userName}!`;
 
-// Mood selector
+// Background Mood Themes
+const images = {
+  default: ["bg1.jpg", "bg2.jpg", "bg3.jpg"],
+  light: ["light1.jpg", "light2.jpg", "light3.jpg"],
+  cute: ["cute1.jpg", "cute2.jpg", "cute3.jpg"]
+};
+
 function changeMood() {
   const mood = document.getElementById("mood-select").value;
-  document.body.className = "";
-  if (mood !== "default") {
-    document.body.classList.add(`mood-${mood}`);
-  }
-  localStorage.setItem("selectedMood", mood);
-}
-const savedMood = localStorage.getItem("selectedMood");
-if (savedMood) {
-  document.getElementById("mood-select").value = savedMood;
-  changeMood();
+  document.body.className = mood;
+  const bgList = images[mood] || images.default;
+  const selected = bgList[Math.floor(Math.random() * bgList.length)];
+  document.body.style.backgroundImage = `url('assets/${selected}')`;
 }
 
-// Background music
-let isMusicPlaying = false;
-const audio = document.getElementById("bg-music");
-const musicBtn = document.getElementById("music-btn");
-function toggleMusic() {
-  if (isMusicPlaying) {
-    audio.pause();
-    musicBtn.textContent = "🎵 Play Music";
-  } else {
-    audio.play();
-    musicBtn.textContent = "🔇 Pause Music";
-  }
-  isMusicPlaying = !isMusicPlaying;
+// Sri Lankan Holidays
+const holidays = {
+  "2025-01-15": "Tamil Thai Pongal Day",
+  "2025-02-04": "Independence Day",
+  "2025-04-13": "Sinhala and Tamil New Year’s Eve",
+  "2025-04-14": "Sinhala and Tamil New Year’s Day",
+  "2025-05-01": "May Day",
+  "2025-06-20": "Poson Full Moon Poya Day",
+  // Add more holidays here
+};
+
+// Calendar & Notes Save
+const calendar = document.getElementById("calendar");
+const note = document.getElementById("sticky-note");
+const quote = document.getElementById("quote");
+const holidayBox = document.getElementById("holiday");
+
+function loadDataForDate() {
+  const selected = calendar.value;
+  note.value = localStorage.getItem(`${selected}_note`) || "";
+  quote.value = localStorage.getItem(`${selected}_quote`) || "";
+  holidayBox.innerText = holidays[selected] ? `🎉 Holiday: ${holidays[selected]}` : "";
 }
 
-// To-do list
-const taskList = document.getElementById("task-list");
-function addTask() {
-  const input = document.getElementById("task-input");
-  if (input.value.trim() !== "") {
-    const li = document.createElement("li");
-    li.textContent = input.value;
-    taskList.appendChild(li);
-    input.value = "";
-  }
-}
-
-// Daily quote
-const quotes = [
-  "Stay positive, work hard, make it happen.",
-  "Believe you can and you're halfway there.",
-  "Every day is a fresh start.",
-  "Progress, not perfection."
-];
-document.getElementById("quote").innerText = quotes[Math.floor(Math.random() * quotes.length)];
-
-// Sticky note
-const sticky = document.getElementById("sticky-note");
-sticky.value = localStorage.getItem("stickyNote") || "";
-sticky.addEventListener("input", () => {
-  localStorage.setItem("stickyNote", sticky.value);
+note.addEventListener("input", () => {
+  const selected = calendar.value;
+  localStorage.setItem(`${selected}_note`, note.value);
 });
 
-// Random background images (optional instead of mood)
-const backgrounds = [
-  "url('https://source.unsplash.com/1600x900/?nature')",
-  "url('https://source.unsplash.com/1600x900/?sky')",
-  "url('https://source.unsplash.com/1600x900/?galaxy')",
-  "url('https://source.unsplash.com/1600x900/?abstract')"
-];
-document.body.style.backgroundImage = backgrounds[Math.floor(Math.random() * backgrounds.length)];
+quote.addEventListener("input", () => {
+  const selected = calendar.value;
+  localStorage.setItem(`${selected}_quote`, quote.value);
+});
+
+// Music
+const music = document.getElementById("bg-music");
+function toggleMusic() {
+  if (music.paused) music.play();
+  else music.pause();
+}
