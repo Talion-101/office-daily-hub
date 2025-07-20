@@ -1,20 +1,29 @@
-// Greeting + Clock
+// Greeting + Clock (no timezone)
 const greeting = document.getElementById("greeting");
+const clock = document.getElementById("clock");
 const userName = "Isuru";
+
 function updateClock() {
   const now = new Date();
   const hour = now.getHours();
   let greetText = hour < 12 ? "Good Morning" : hour < 18 ? "Good Afternoon" : "Good Evening";
   greeting.innerText = `${greetText}, ${userName}!`;
-  document.getElementById("clock").innerText = now.toLocaleString(undefined, {
-    weekday: "long", year: "numeric", month: "long", day: "numeric",
-    hour: "numeric", minute: "numeric", second: "numeric", timeZoneName: "short"
+
+  // Local date + time, no timezone shown
+  clock.innerText = now.toLocaleString(undefined, {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric",
   });
 }
 setInterval(updateClock, 1000);
 updateClock();
 
-// Theme toggle
+// Theme toggle (unchanged)
 function setTheme(mode) {
   document.body.className = mode;
   document.getElementById("dark-btn").classList.toggle("active", mode === "default");
@@ -29,50 +38,103 @@ const quotes = [
   "Do great work by loving what you do. — Steve Jobs",
   "Be yourself; everyone else is already taken. — Oscar Wilde"
 ];
+const quoteBox = document.getElementById("daily-quote");
+const quoteBtn = document.getElementById("generate-quote");
 
 function refreshQuote() {
-  const box = document.getElementById("daily-quote");
   const today = new Date().toDateString();
   let quote = localStorage.getItem(`quote_${today}`);
   if (!quote) {
     quote = quotes[Math.floor(Math.random() * quotes.length)];
     localStorage.setItem(`quote_${today}`, quote);
   }
-  box.innerText = quote;
-  box.style.display = "block";
+  quoteBox.innerText = quote;
+  quoteBox.style.display = "block"; // Make sure quote is visible
 }
+quoteBtn.addEventListener("click", refreshQuote);
+refreshQuote(); // Load quote on page load
 
-// Calendar
-function renderCalendar() {
-  const now = new Date();
-  const year = now.getFullYear();
-  const month = now.getMonth();
+// --- Interactive Calendar ---
+const calendarGrid = document.getElementById("calendar-grid");
+const stickyNote = document.getElementById("sticky-note");
+const noteStatus = document.getElementById("note-status");
+
+// Holidays example (you can expand this)
+const holidays = {
+  "2025-01-15": "Tamil Thai Pongal Day",
+  "2025-02-04": "Independence Day",
+  "2025-04-13": "Sinhala and Tamil New Year’s Eve",
+  "2025-04-14": "Sinhala and Tamil New Year’s Day",
+  "2025-05-01": "May Day",
+  "2025-06-20": "Poson Full Moon Poya Day"
+};
+
+let selectedDate = new Date(); // Start with today
+
+function renderCalendar(date = new Date()) {
+  const year = date.getFullYear();
+  const month = date.getMonth();
   const firstDay = new Date(year, month, 1).getDay();
   const daysInMonth = new Date(year, month + 1, 0).getDate();
-  const grid = document.getElementById("calendar-grid");
-  grid.innerHTML = "";
-  for (let i = 0; i < firstDay; i++) grid.innerHTML += `<div class="day-box"></div>`;
+
+  calendarGrid.innerHTML = "";
+
+  // Add blank slots for days before month start
+  for (let i = 0; i < firstDay; i++) {
+    const blankDiv = document.createElement("div");
+    blankDiv.classList.add("day-box", "empty");
+    calendarGrid.appendChild(blankDiv);
+  }
+
+  // Add day boxes
   for (let d = 1; d <= daysInMonth; d++) {
-    const dateStr = `${year}-${String(month+1).padStart(2,"0")}-${String(d).padStart(2,"0")}`;
-    grid.innerHTML += `<div class="day-box" title="${dateStr}">${d}</div>`;
+    const dayDiv = document.createElement("div");
+    dayDiv.classList.add("day-box");
+    const dayDate = new Date(year, month, d);
+    const isoDate = dayDate.toISOString().slice(0, 10);
+    dayDiv.textContent = d;
+    dayDiv.title = isoDate;
+
+    // Mark holidays
+    if (holidays[isoDate]) {
+      dayDiv.classList.add("holiday");
+      dayDiv.title += ` - ${holidays[isoDate]}`;
+    }
+
+    // Highlight selected day
+    if (
+      selectedDate.getFullYear() === year &&
+      selectedDate.getMonth() === month &&
+      selectedDate.getDate() === d
+    ) {
+      dayDiv.classList.add("selected");
+    }
+
+    dayDiv.addEventListener("click", () => {
+      selectedDate = dayDate;
+      renderCalendar(selectedDate); // rerender to update highlight
+      loadNoteForDate(selectedDate);
+    });
+
+    calendarGrid.appendChild(dayDiv);
   }
 }
-renderCalendar();
+renderCalendar(selectedDate);
 
-// Sticky Notes
-const note = document.getElementById("sticky-note");
-const noteStatus = document.getElementById("note-status");
-function loadNote() {
-  const today = new Date().toDateString();
-  note.value = localStorage.getItem(`note_${today}`) || "";
-  const savedAt = localStorage.getItem(`note_saved_${today}`);
+// Load note for selected date
+function loadNoteForDate(date) {
+  const key = date.toDateString();
+  stickyNote.value = localStorage.getItem(`note_${key}`) || "";
+  const savedAt = localStorage.getItem(`note_saved_${key}`);
   noteStatus.innerText = savedAt ? `Saved at: ${savedAt}` : "";
 }
-note.addEventListener("input", () => {
-  const today = new Date().toDateString();
-  localStorage.setItem(`note_${today}`, note.value);
+loadNoteForDate(selectedDate);
+
+// Save note on input with timestamp
+stickyNote.addEventListener("input", () => {
+  const key = selectedDate.toDateString();
+  localStorage.setItem(`note_${key}`, stickyNote.value);
   const time = new Date().toLocaleTimeString();
-  localStorage.setItem(`note_saved_${today}`, time);
+  localStorage.setItem(`note_saved_${key}`, time);
   noteStatus.innerText = `Saved at: ${time}`;
 });
-loadNote();
