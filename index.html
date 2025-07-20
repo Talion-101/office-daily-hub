@@ -9,52 +9,32 @@
 <body>
   <div class="container">
     <h1 id="greeting"></h1>
+    <div id="clock" class="time-box"></div>
 
     <div class="controls">
       <label for="mood-select">🎨 Mood:</label>
       <select id="mood-select" onchange="changeMood()">
         <option value="default">Dark</option>
-        <option value="light">Light</option>
         <option value="cute">Cute</option>
       </select>
+      <button onclick="refreshQuote()">🔄 Refresh Quote</button>
     </div>
 
     <div class="card">
-      <h2>📅 Calendar</h2>
-      <input type="date" id="calendar" onchange="loadDataForDate()"/>
+      <h2>📅 Sri Lankan Calendar</h2>
+      <div id="calendar-grid"></div>
       <div id="holiday"></div>
+    </div>
+
+    <div class="card">
+      <h2>💬 Daily Motivation</h2>
+      <p id="daily-quote"></p>
     </div>
 
     <div class="card">
       <h2>📝 Sticky Note</h2>
       <textarea id="sticky-note" placeholder="Write your note..."></textarea>
-    </div>
-
-    <div class="card">
-      <h2>💬 Motivation</h2>
-      <input type="text" id="quote" placeholder="Add your quote for today"/>
-    </div>
-
-    <div class="card">
-      <h2>✅ Weekly Goals</h2>
-      <ul id="goals-list">
-        <li><input type="checkbox" data-task="1"> Finish Report</li>
-        <li><input type="checkbox" data-task="2"> Client Follow-up</li>
-        <li><input type="checkbox" data-task="3"> Team Standup</li>
-        <li><input type="checkbox" data-task="4"> Budget Review</li>
-      </ul>
-      <div id="progress-container">
-        <label for="progress">🎁 Rewards Progress</label>
-        <progress id="progress" value="0" max="100"></progress>
-      </div>
-    </div>
-
-    <div class="card music-card">
-      <h2>🎵 Music</h2>
-      <button onclick="toggleMusic()">Play / Pause</button>
-      <audio id="bg-music" loop>
-        <source src="https://cdn.pixabay.com/download/audio/2023/05/23/audio_67a4f71c3c.mp3?filename=relaxing-vlog-148160.mp3" type="audio/mpeg">
-      </audio>
+      <div id="note-status"></div>
     </div>
 
     <button onclick="window.print()" id="export-btn">🖨️ Export to PDF</button>
