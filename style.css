@@ -79,14 +79,31 @@ button {
   background-color: #333;
   border-radius: 6px;
   text-align: center;
-  transition: transform 0.2s ease;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  cursor: pointer;
 }
+
 .day-box:hover {
   transform: scale(1.05);
   background-color: #555;
 }
+
 .day-box.holiday {
   background-color: #d67bf8;
+  cursor: help;
+}
+
+.day-box.selected {
+  background-color: #ff9bcb;
+  color: #222;
+  font-weight: bold;
+  transform: scale(1.1);
+  box-shadow: 0 0 10px #ff9bcb;
+}
+
+.day-box.empty {
+  background: transparent;
+  pointer-events: none;
 }
 
 #daily-quote {
